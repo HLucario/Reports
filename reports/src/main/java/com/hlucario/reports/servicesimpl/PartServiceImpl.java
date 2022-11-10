@@ -20,9 +20,13 @@ public class PartServiceImpl implements PartService{
 	
 	@Override
 	public Part getPart(Long id) {
-		Optional<Part> partOptional = partsRepository.findById(id);
-		Part part = partOptional.get();
-		return part;
+		if(partsRepository.existsById(id))
+		{
+			Optional<Part> partOptional = partsRepository.findById(id);
+			Part part = partOptional.get();
+			return part;
+		}
+		return null;
 	}
 
 	@Override

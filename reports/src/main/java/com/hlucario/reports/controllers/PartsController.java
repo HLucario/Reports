@@ -3,6 +3,8 @@ package com.hlucario.reports.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +30,11 @@ public class PartsController {
 	}
 	
 	@GetMapping(path="/{partId}")
-	public Part get(@PathVariable(value = "partId") Long partId) {
-		return partService.getPart(partId);
+	public ResponseEntity<String> get(@PathVariable(value = "partId") Long partId) {
+		Part partAux = partService.getPart(partId);
+		if(partAux != null)
+			return ResponseEntity.ok(partAux);
+		return ResponseEntity.badRequest().body("That Part doesn't exist");
 	}
 	
 	@PostMapping("")
