@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hlucario.reports.models.Part;
+import com.hlucario.reports.repositories.DamageReportsRepository;
 import com.hlucario.reports.repositories.PartsRepository;
 import com.hlucario.reports.services.PartService;
 
@@ -15,6 +16,7 @@ public class PartServiceImpl implements PartService{
 
 	@Autowired
 	PartsRepository partsRepository;
+	
 	
 	@Override
 	public Part getPart(Long id) {

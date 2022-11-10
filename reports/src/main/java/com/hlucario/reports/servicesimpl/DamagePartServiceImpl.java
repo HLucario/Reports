@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.hlucario.reports.models.DamagePart;
 import com.hlucario.reports.repositories.DamagePartsRepository;
+import com.hlucario.reports.repositories.DamageReportsRepository;
+import com.hlucario.reports.repositories.PartsRepository;
 import com.hlucario.reports.services.DamagePartService;
 
 @Service
@@ -16,31 +18,35 @@ public class DamagePartServiceImpl implements DamagePartService{
 	DamagePartsRepository damagePartsRepository;
 	
 	@Override
-	public DamagePart getDamageReport(Long id) {
+	public DamagePart getDamagePart(Long id) {
 		DamagePart damagePart = damagePartsRepository.findById(id).get();
 		return damagePart;
 	}
 
 	@Override
-	public List<DamagePart> getDamageReports() {
+	public List<DamagePart> getDamageParts() {
 		List<DamagePart> damageParts = damagePartsRepository.findAll();
 		return damageParts;
 	}
 
 	@Override
-	public DamagePart createDamageReport(DamagePart damagePart) {
+	public DamagePart createDamagePart(DamagePart damagePart) {		
 		DamagePart damagePartN = damagePartsRepository.save(damagePart);
 		return damagePartN;
 	}
 
 	@Override
-	public DamagePart updatePart(Long damagePartId, DamagePart damagePart) {
+	public DamagePart updateDamagePart(Long damagePartId, DamagePart damagePart) {
 		DamagePart damagePartU = damagePartsRepository.findById(damagePartId).get();
-		return damagePart;
+		damagePartU.setDamageReportId(damagePart.getDamageReportId());
+		damagePartU.setPartId(damagePart.getPartId());
+		damagePartU.setQuantity(damagePart.getQuantity());
+		DamagePart damagePartN = damagePartsRepository.save(damagePartU);
+		return damagePartN;
 	}
 
 	@Override
-	public void deleteDamageReport(Long damagePartId) {
+	public void deleteDamagePart(Long damagePartId) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -22,23 +24,29 @@ public class DamageReport {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
 	@Column(name="id")
+	@NotNull
 	public Long id;
 	
 	@Column(name = "created_date")
 	@JsonProperty(access = Access.READ_ONLY)
+	@NotNull
 	public LocalDate createdDate;
 	
 	@Column(name = "severity")
+	@NotNull
 	public String severity;
 	
 	@Column(name = "estimated_repair_time")
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@NotNull
 	public LocalDate estimatedRepairTime;
 	
 	@Column(name = "description")
+	@NotNull
 	public String description;
 	
 	@Column(name="workshop_id")
+	@NotNull
 	public Long workshopId;
 
 	public Long getId() {

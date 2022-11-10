@@ -12,7 +12,7 @@ public interface DamageReportService {
 	
 	public DamageReport createDamageReport(DamageReport damageReport);
 	
-	public DamageReport updatePart(Long damageReportId, DamageReport damageReport);
+	public DamageReport updateDamageReport(Long damageReportId, DamageReport damageReport);
 	
 	public void deleteDamageReport(Long damageReportId);
 }

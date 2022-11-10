@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hlucario.reports.models.Part;
+import com.hlucario.reports.repositories.PartsRepository;
 import com.hlucario.reports.services.PartService;
 
 @RestController
@@ -21,6 +22,10 @@ public class PartsController {
 
 	@Autowired
 	PartService partService;
+	
+	public PartsController(PartService partService) {
+		this.partService = partService;
+	}
 	
 	@GetMapping(path="/{partId}")
 	public Part get(@PathVariable(value = "partId") Long partId) {

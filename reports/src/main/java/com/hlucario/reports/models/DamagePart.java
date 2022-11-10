@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "damage_part")
@@ -19,17 +22,21 @@ public class DamagePart {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
 	@Column(name="id")
+	@NotNull
 	public Long id;
 		
 	@ManyToOne
 	@JoinColumn(name = "damage_report_id")
+	@JsonIgnore
 	public DamageReport damageReportId;
 	
 	@ManyToOne
 	@JoinColumn(name = "part_id")
-	public Part part;
+	@JsonIgnore
+	public Part partId;
 	
 	@Column(name="quantity")
+	@NotNull
 	public Long quantity;
 
 	public Long getId() {
@@ -40,8 +47,8 @@ public class DamagePart {
 		return damageReportId;
 	}
 
-	public Part getPart() {
-		return part;
+	public Part getPartId() {
+		return partId;
 	}
 
 	public Long getQuantity() {
@@ -56,8 +63,8 @@ public class DamagePart {
 		this.damageReportId = damageReportId;
 	}
 
-	public void setPart(Part part) {
-		this.part = part;
+	public void setPartId(Part partId) {
+		this.partId = partId;
 	}
 
 	public void setQuantity(Long quantity) {

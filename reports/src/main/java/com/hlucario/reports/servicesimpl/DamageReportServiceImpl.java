@@ -1,11 +1,13 @@
 package com.hlucario.reports.servicesimpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hlucario.reports.models.DamageReport;
+import com.hlucario.reports.repositories.DamagePartsRepository;
 import com.hlucario.reports.repositories.DamageReportsRepository;
 import com.hlucario.reports.services.DamageReportService;
 
@@ -14,7 +16,7 @@ public class DamageReportServiceImpl implements DamageReportService{
 
 	@Autowired
 	DamageReportsRepository damageReportsRepository;
-	
+
 	@Override
 	public DamageReport getDamageReport(Long id) {
 		DamageReport damageReport = damageReportsRepository.findById(id).get();
@@ -29,12 +31,13 @@ public class DamageReportServiceImpl implements DamageReportService{
 
 	@Override
 	public DamageReport createDamageReport(DamageReport damageReport) {
+		damageReport.setCreatedDate(LocalDate.now());
 		DamageReport damageReportN = damageReportsRepository.save(damageReport);
 		return damageReportN;
 	}
 
 	@Override
-	public DamageReport updatePart(Long damageReportId, DamageReport damageReport) {
+	public DamageReport updateDamageReport(Long damageReportId, DamageReport damageReport) {
 		DamageReport damageReportU = damageReportsRepository.findById(damageReportId).get();
 		damageReportU.setDescription(damageReport.getDescription());
 		damageReportU.setEstimatedRepairTime(damageReport.getEstimatedRepairTime());

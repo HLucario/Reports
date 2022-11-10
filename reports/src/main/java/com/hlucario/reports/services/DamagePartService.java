@@ -3,16 +3,17 @@ package com.hlucario.reports.services;
 import java.util.List;
 
 import com.hlucario.reports.models.DamagePart;
+import com.hlucario.reports.models.DamagePartCustom;
 
 public interface DamagePartService {
 
-	public DamagePart getDamageReport(Long id);
+	public DamagePart getDamagePart(Long id);
 	
-	public List<DamagePart> getDamageReports();
+	public List<DamagePart> getDamageParts();
 	
-	public DamagePart createDamageReport(DamagePart damagePart);
+	public DamagePart createDamagePart(DamagePart damagePart);
 	
-	public DamagePart updatePart(Long damagePartId, DamagePart damagePart);
+	public DamagePart updateDamagePart(Long damagePartId, DamagePart damagePart);
 	
-	public void deleteDamageReport(Long damagePartId);
+	public void deleteDamagePart(Long damagePartId);
 }
