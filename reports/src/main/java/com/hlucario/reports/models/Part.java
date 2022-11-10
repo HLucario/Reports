@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -27,19 +29,21 @@ public class Part {
 	public Long id;
 	
 	@Column(name = "name")
-	@NotNull
+	@NotNull(message = "The name must not be null!")
+	@NotEmpty(message = "The name must not be empty!")
+	@NotBlank(message = "The name must not be null!")
 	public String name;
 	
 	@Column(name = "description")
-	@NotNull
+	@NotNull(message = "The description must not be null!")
 	public String description;
 	
 	@Column(name="part_number")
-	@NotNull
+	@NotNull(message = "The part number must not be null!")
 	public String partNumber;
 	
 	@Column(name="unit_price")
-	@NotNull
+	@NotNull (message = "The unit price must not be null!")
 	public Double unitPrice;
 	
 	@OneToMany(mappedBy = "partId", orphanRemoval = false)
@@ -75,6 +79,11 @@ public class Part {
 	}
 	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+	@Override
+	public String toString() {
+		return "Part [id=" + id + ", name=" + name + ", description=" + description + ", partNumber=" + partNumber
+				+ ", unitPrice=" + unitPrice + ", damagePart=" + damagePart + "]";
 	}
 	
 	

@@ -31,8 +31,12 @@ public class PartServiceImpl implements PartService{
 
 	@Override
 	public List<Part> getParts() {
-		List<Part> parts = partsRepository.findAll();
-		return parts;
+		if(partsRepository.count()> 0)
+		{
+			List<Part> parts = partsRepository.findAll();
+			return parts;
+		}
+		return null;
 	}
 
 	@Override

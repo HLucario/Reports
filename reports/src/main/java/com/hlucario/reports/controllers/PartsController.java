@@ -2,11 +2,15 @@ package com.hlucario.reports.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,18 +37,18 @@ public class PartsController {
 	public ResponseEntity<String> get(@PathVariable(value = "partId") Long partId) {
 		Part partAux = partService.getPart(partId);
 		if(partAux != null)
-			return ResponseEntity.ok(partAux);
-		return ResponseEntity.badRequest().body("That Part doesn't exist");
-	}
-	
-	@PostMapping("")
-	public Part post(@RequestBody Part part) {
-		return partService.createPart(part);
+			return ResponseEntity.ok(partAux.toString());
+		return ResponseEntity.badRequest().body("That Part doesn't exist!");
 	}
 	
 	@GetMapping("")
 	public List<Part> getAll() {
 		return partService.getParts();
+	}
+	
+	@PostMapping("")
+	public Part post(@RequestBody Part part) {
+		return partService.createPart(part);
 	}
 	
 	@PutMapping(path="/{partId}")
